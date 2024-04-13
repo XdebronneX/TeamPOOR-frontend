@@ -2,6 +2,8 @@ import React, { Fragment, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // Importing useParams and useNavigate
 import { useDispatch, useSelector } from "react-redux";
 import { reschedBooking, clearErrors } from "../../actions/appointmentActions";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RescheduleBooking = () => {
     const dispatch = useDispatch();
