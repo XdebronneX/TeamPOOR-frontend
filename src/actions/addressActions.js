@@ -35,8 +35,9 @@ export const createAddresses = (addressesData) => async (dispatch) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials:true
         }
-        const { data } = await axios.post('/api/v1/create/my-address', addressesData, config)
+        const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/create/my-address`, addressesData, config)
 
         dispatch({
             type: CREATE_ADDRESSES_SUCCESS,
@@ -54,7 +55,7 @@ export const createAddresses = (addressesData) => async (dispatch) => {
 export const myAddresses = () => async (dispatch) => {
     try {
         dispatch({ type: MY_ADDRESSES_REQUEST });
-        const { data } = await axios.get(`/api/v1/my-addresses`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/my-addresses`, {withCredentials:true});
         dispatch({
             type: MY_ADDRESSES_SUCCESS,
             payload: data.userAddresses,
@@ -73,9 +74,10 @@ export const updateAddresses = (id, addressesData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials:true
         }
-        const { data } = await axios.put(`/api/v1/my-address/${id}`, addressesData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/my-address/${id}`, addressesData, config)
         dispatch({
             type: UPDATE_ADDRESSES_SUCCESS,
             payload: data.success
@@ -94,9 +96,10 @@ export const updateDefaultAddresses = (id, addressesData) => async (dispatch) =>
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials:true
         }
-        const { data } = await axios.put(`/api/v1/default/${id}`, addressesData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/default/${id}`, addressesData, config)
         dispatch({
             type: UPDATE_ADDRESSES_SUCCESS,
             payload: data.success
@@ -113,7 +116,7 @@ export const getAddressDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: ADDRESS_DETAILS_REQUEST })
 
-        const { data } = await axios.get(`/api/v1/my-address/${id}`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/my-address/${id}`, {withCredentials:true})
 
         dispatch({
             type: ADDRESS_DETAILS_SUCCESS,
@@ -133,7 +136,7 @@ export const getAddressDetails = (id) => async (dispatch) => {
 export const deleteAddresses = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_ADDRESSES_REQUEST })
-        const { data } = await axios.delete(`/api/v1/my-address/${id}`)
+        const { data } = await axios.delete(`${process.env.REACT_APP_API}/api/v1/my-address/${id}`, {withCredentials:true})
         dispatch({
             type: DELETE_ADDRESSES_SUCCESS,
             payload: data.success

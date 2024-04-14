@@ -37,7 +37,7 @@ export const getAllServices = () => async (dispatch) => {
         dispatch({
             type: ALL_SERVICES_REQUEST
         })
-        const { data } = await axios.get('/api/v1/showAllServices')
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/showAllServices`, {withCredentials: true})
         dispatch({
             type: ALL_SERVICES_SUCCESS,
             payload: data
@@ -55,7 +55,7 @@ export const getAdminServices = () => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_SERVICES_REQUEST });
 
-        const { data } = await axios.get(`/api/v1/admin/view/all/services`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/view/all/services`, {withCredentials:true});
 
         dispatch({
             type: ADMIN_SERVICES_SUCCESS,
@@ -72,7 +72,7 @@ export const getAdminServices = () => async (dispatch) => {
 export const deleteService = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_SERVICE_REQUEST })
-        const { data } = await axios.delete(`/api/v1/admin/service/${id}`)
+        const { data } = await axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/service/${id}`, {withCredentials:true})
         dispatch({
             type: DELETE_SERVICE_SUCCESS,
             payload: data.success
@@ -89,7 +89,7 @@ export const getServiceDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: SERVICE_DETAILS_REQUEST })
 
-        const { data } = await axios.get(`/api/v1/showSingleService/${id}`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/showSingleService/${id}`, {withCredentials:true})
 
         dispatch({
             type: SERVICE_DETAILS_SUCCESS,
@@ -112,9 +112,10 @@ export const updateService = (id, serviceData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials: true
         }
-        const { data } = await axios.put(`/api/v1/admin/service/${id}`, serviceData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/admin/service/${id}`, serviceData, config)
         dispatch({
             type: UPDATE_SERVICE_SUCCESS,
             payload: data.success
@@ -133,9 +134,10 @@ export const newService = (serviceData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data'
-            }
+            },
+            withCredentials: true
         }
-        const { data } = await axios.post(`/api/v1/add-service`, serviceData, config)
+        const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/add-service`, serviceData, config)
 
         dispatch({
             type: NEW_SERVICE_SUCCESS,

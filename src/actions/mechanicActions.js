@@ -21,7 +21,7 @@ export const myAssignTasks = () => async dispatch => {
     try {
         dispatch({ type: MY_TASKS_REQUEST })
 
-        const { data } = await axios.get('/api/v1/mechanics/task')
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/mechanics/task`, {withCredentials:true})
 
         dispatch({
             type: MY_TASKS_SUCCESS,
@@ -45,9 +45,10 @@ export const newReviewMechanic = (id, reviewData) => async (dispatch) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials:true
         };
 
-        const { data } = await axios.put(`/api/v1/review/mechanic/${id}`, reviewData, config);
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/review/mechanic/${id}`, reviewData, config);
 
         dispatch({
             type: NEW_MECHANIC_REVIEW_SUCCESS,
@@ -66,7 +67,7 @@ export const newReviewMechanic = (id, reviewData) => async (dispatch) => {
 export const viewAllReviewsMechanic = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_REVIEWS_MECHANIC_REQUEST });
-        const { data } = await axios.get('/api/v1/admin/mechanic/list-reviews');
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/mechanic/list-reviews`, {withCredentials:true});
 
         dispatch({
             type: ALL_REVIEWS_MECHANIC_SUCCESS,

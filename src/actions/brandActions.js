@@ -29,7 +29,7 @@ import {
 export const viewAllBrands = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_BRANDS_REQUEST });
-        const { data } = await axios.get('/api/v1/admin/view/all/brands');
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/view/all/brands`, {withCredentials:true});
 
         dispatch({
             type: ALL_BRANDS_SUCCESS,
@@ -49,9 +49,10 @@ export const createBrands = (brandData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data'
-            }
+            },
+            withCredentials:true
         }
-        const { data } = await axios.post(`/api/v1/add/brand/new`, brandData, config)
+        const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/add/brand/new`, brandData, config)
         dispatch({
             type: CREATE_BRANDS_SUCCESS,
             payload: data
@@ -68,7 +69,7 @@ export const getBrandDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: BRAND_DETAILS_REQUEST })
 
-        const { data } = await axios.get(`/api/v1/admin/brands/${id}`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/brands/${id}`, {withCredentials:true})
 
         dispatch({
             type: BRAND_DETAILS_SUCCESS,
@@ -91,9 +92,10 @@ export const updateBrand = (id, brandData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials:true
         }
-        const { data } = await axios.put(`/api/v1/admin/brands/${id}`, brandData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/admin/brands/${id}`, brandData, config)
         dispatch({
             type: UPDATE_BRANDS_SUCCESS,
             payload: data.success
@@ -109,7 +111,7 @@ export const updateBrand = (id, brandData) => async (dispatch) => {
 export const deleteBrand = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_BRANDS_REQUEST })
-        const { data } = await axios.delete(`/api/v1/admin/brands/${id}`)
+        const { data } = await axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/brands/${id}`, {withCredentials:true})
         dispatch({
             type: DELETE_BRANDS_SUCCESS,
             payload: data.success

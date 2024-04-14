@@ -35,9 +35,10 @@ export const createAppointment = appointment => async (dispatch, getState) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials:true
         }
-        const { data } = await axios.post('/api/v1/appointment/new', appointment, config)
+        const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/appointment/new`, appointment, config)
 
         dispatch({
             type: CREATE_APPOINTMENT_SUCCESS,
@@ -55,7 +56,7 @@ export const myAppointments = () => async dispatch => {
     try {
         dispatch({ type: MY_APPOINTMENTS_REQUEST })
 
-        const { data } = await axios.get('/api/v1/appointment/list')
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/appointment/list`, {withCredentials:true})
 
         dispatch({
             type: MY_APPOINTMENTS_SUCCESS,
@@ -75,7 +76,7 @@ export const getAppointDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: APPOINTMENT_DETAILS_REQUEST });
 
-        const { data } = await axios.get(`/api/v1/appointment/${id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/appointment/${id}`, {withCredentials:true});
 
         dispatch({
             type: APPOINTMENT_DETAILS_SUCCESS,
@@ -96,7 +97,7 @@ export const allSecAppointments = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_APPOINTMENTS_REQUEST });
 
-        const { data } = await axios.get(`/api/v1/secretary/appointment/list`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/secretary/appointment/list`, {withCredentials:true})
 
         dispatch({
             type: ALL_APPOINTMENTS_SUCCESS,
@@ -117,10 +118,11 @@ export const updateBysecretary = (id, bookingData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials:true
         }
 
-        const { data } = await axios.put(`/api/v1/secretary/appointment/${id}`, bookingData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/secretary/appointment/${id}`, bookingData, config)
 
         dispatch({
             type: UPDATE_APPOINTMENT_SUCCESS,
@@ -140,10 +142,11 @@ export const updateAdditional=  (id, bookingData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials:true
         }
 
-        const { data } = await axios.put(`/api/v1/secretary/additional/${id}`, bookingData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/secretary/additional/${id}`, bookingData, config)
 
         dispatch({
             type: UPDATE_APPOINTMENT_SUCCESS,
@@ -163,10 +166,11 @@ export const assignMechBySec = (id, bookingData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials:true
         }
 
-        const { data } = await axios.put(`/api/v1/secretary/assign/mechanic/${id}`, bookingData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/secretary/assign/mechanic/${id}`, bookingData, config)
 
         dispatch({
             type: UPDATE_APPOINTMENT_SUCCESS,
@@ -185,7 +189,7 @@ export const allAppointments = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_APPOINTMENTS_REQUEST });
 
-        const { data } = await axios.get(`/api/v1/admin/appointment/list`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/appointment/list`, {withCredentials:true})
 
         dispatch({
             type: ALL_APPOINTMENTS_SUCCESS,
@@ -203,7 +207,7 @@ export const allAppointments = () => async (dispatch) => {
 export const deleteBooking = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_APPOINTMENT_REQUEST })
-        const { data } = await axios.delete(`/api/v1/admin/appointment/${id}`)
+        const { data } = await axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/appointment/${id}`, {withCredentials:true})
 
         dispatch({
             type: DELETE_APPOINTMENT_SUCCESS,
@@ -224,10 +228,11 @@ export const updateBooking = (id, bookingData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials:true
         }
 
-        const { data } = await axios.put(`/api/v1/admin/appointment/${id}`, bookingData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/admin/appointment/${id}`, bookingData, config)
 
         dispatch({
             type: UPDATE_APPOINTMENT_SUCCESS,
@@ -247,10 +252,11 @@ export const cancelBooking = (id, bookingData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials:true
         }
 
-        const { data } = await axios.put(`/api/v1/backjob/appointment/${id}`, bookingData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/backjob/appointment/${id}`, bookingData, config)
 
         dispatch({
             type: UPDATE_APPOINTMENT_SUCCESS,
@@ -270,9 +276,10 @@ export const reschedBooking = (id, bookingData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials: true
         }
-        const { data } = await axios.put(`/api/v1/backjob/reschedule/appointment/${id}`, bookingData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/backjob/reschedule/appointment/${id}`, bookingData, config)
         dispatch({
             type: UPDATE_APPOINTMENT_SUCCESS,
             payload: data.success
@@ -291,10 +298,11 @@ export const assignMech = (id, bookingData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials: true
         }
 
-        const { data } = await axios.put(`/api/v1/admin/assign/mechanic/${id}`, bookingData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/admin/assign/mechanic/${id}`, bookingData, config)
 
         dispatch({
             type: UPDATE_APPOINTMENT_SUCCESS,
@@ -311,7 +319,7 @@ export const assignMech = (id, bookingData) => async (dispatch) => {
 export const viewAllMechanics = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_USERS_REQUEST })
-        const { data } = await axios.get('/api/v1/all-mechanics')
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/all-mechanics`, {withCredentials:true})
 
         dispatch({
             type: ALL_USERS_SUCCESS,

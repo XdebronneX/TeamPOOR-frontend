@@ -36,8 +36,9 @@ export const createMotorcycle = (motorcycleData) => async (dispatch) => {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
+            withCredentials:true
         }
-        const { data } = await axios.post('/api/v1/create/motorcycle/new', motorcycleData, config)
+        const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/create/motorcycle/new`, motorcycleData, config)
 
         dispatch({
             type: CREATE_MOTORCYCLES_SUCCESS,
@@ -54,7 +55,7 @@ export const createMotorcycle = (motorcycleData) => async (dispatch) => {
 export const myMotorcycle = () => async (dispatch) => {
     try {
         dispatch({ type: MY_MOTORCYCLES_REQUEST });
-        const { data } = await axios.get(`/api/v1/list-motorcycle`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/list-motorcycle`, {withCredentials:true});
         dispatch({
             type: MY_MOTORCYCLES_SUCCESS,
             payload: data.userMotorcycles,
@@ -71,7 +72,7 @@ export const myMotorcycle = () => async (dispatch) => {
 export const viewAllMotorcycles = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_MOTORCYCLES_REQUEST })
-        const { data } = await axios.get('/api/v1/admin/view/all/motorcycles')
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/view/all/motorcycles`, {withCredentials:true})
 
         dispatch({
             type: ALL_MOTORCYCLES_SUCCESS,
@@ -93,9 +94,10 @@ export const updateMotorcycle = (id, motorcycleData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials:true
         }
-        const { data } = await axios.put(`/api/v1/admin/motorcycle/${id}`, motorcycleData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/admin/motorcycle/${id}`, motorcycleData, config)
         dispatch({
             type: UPDATE_MOTORCYCLES_SUCCESS,
             payload: data.success
@@ -113,7 +115,7 @@ export const getMotorcycleDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: MOTORCYCLE_DETAILS_REQUEST })
 
-        const { data } = await axios.get(`/api/v1/admin/motorcycle/${id}`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/motorcycle/${id}`, {withCredentials:true})
 
         dispatch({
             type: MOTORCYCLE_DETAILS_SUCCESS,
@@ -134,7 +136,7 @@ export const getMotorcycleDetails = (id) => async (dispatch) => {
 export const deleteMotorcycle = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_MOTORCYCLES_REQUEST })
-        const { data } = await axios.delete(`/api/v1/admin/motorcycle/${id}`)
+        const { data } = await axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/motorcycle/${id}`, {withCredentials:true})
         dispatch({
             type: DELETE_MOTORCYCLES_SUCCESS,
             payload: data.success

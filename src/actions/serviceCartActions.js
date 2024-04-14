@@ -12,7 +12,7 @@ import {
 } from "../constants/serviceCartConstants"
 
 export const addServiceToCart = (id) => async (dispatch, getState) => {
-    const { data } = await axios.get(`/api/v1/showSingleService/${id}`)
+    const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/showSingleService/${id}`, {withCredentials: true})
     dispatch({
         type: ADD_TO_SERVICE_CART,
         payload: {

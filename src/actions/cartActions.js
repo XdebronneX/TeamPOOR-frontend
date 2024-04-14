@@ -3,7 +3,7 @@ import { ADD_TO_CART, CLEAR_CART, REMOVE_ITEM_CART, SAVE_SHIPPING_INFO, SAVE_PAY
 const SECONDS_IN_MINUTE = 60;
 const STOCK_REMOVE_TIMEFRAME = 1 * SECONDS_IN_MINUTE;
 export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
-    const { data } = await axios.get(`/api/v1/showSingleProduct/${id}`)
+    const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/showSingleProduct/${id}`, {withCredentials:true})
     dispatch({
         type: ADD_TO_CART,
         payload: {

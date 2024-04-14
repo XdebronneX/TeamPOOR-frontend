@@ -47,9 +47,10 @@ export const createOrder = order => async (dispatch, getState) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials:true
         }
-        const { data } = await axios.post('/api/v1/order/new', order, config)
+        const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/order/new`, order, config)
         
         dispatch({
             type: CREATE_ORDER_SUCCESS,
@@ -71,9 +72,10 @@ export const verifyOrders = (token, id) => async (dispatch) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials:true
         };
 
-        const { data } = await axios.get(`/api/v1/paymongo-gcash/${token}/${id}`, config);
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/paymongo-gcash/${token}/${id}`, config);
 
         dispatch({
             type: VERIFY_ORDER_SUCCESS,
@@ -92,7 +94,7 @@ export const myOrders = () => async dispatch => {
     try {
         dispatch({ type: MY_ORDERS_REQUEST })
 
-        const { data } = await axios.get('/api/v1/orders/me')
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/orders/me`, {withCredentials:true})
 
         dispatch({
             type: MY_ORDERS_SUCCESS,
@@ -112,7 +114,7 @@ export const getOldOrder = (id) => async (dispatch) => {
     try {
         dispatch({ type: ORDER_CONTINUE_REQUEST });
 
-        const { data } = await axios.get(`/api/v1/payment/${id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/payment/${id}`, {withCredentials:true});
 
         dispatch({
             type: ORDER_CONTINUE_SUCCESS,
@@ -132,7 +134,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: ORDER_DETAILS_REQUEST });
 
-        const { data } = await axios.get(`/api/v1/order/${id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/order/${id}`, {withCredentials:true});
 
         dispatch({
             type: ORDER_DETAILS_SUCCESS,
@@ -152,7 +154,7 @@ export const allOrders = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_ORDERS_REQUEST });
 
-        const { data } = await axios.get(`/api/v1/admin/orders`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/orders`, {withCredentials:true})
 
         dispatch({
             type: ALL_ORDERS_SUCCESS,
@@ -171,7 +173,7 @@ export const listOrders = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_ORDERS_REQUEST });
 
-        const { data } = await axios.get(`/api/v1/secretary/orders`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/secretary/orders`, {withCredentials:true})
 
         dispatch({
             type: ALL_ORDERS_SUCCESS,
@@ -189,7 +191,7 @@ export const listOrders = () => async (dispatch) => {
 export const deleteOrder = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_ORDER_REQUEST })
-        const { data } = await axios.delete(`/api/v1/admin/order/${id}`)
+        const { data } = await axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/order/${id}`, {withCredentials:true})
 
         dispatch({
             type: DELETE_ORDER_SUCCESS,
@@ -210,11 +212,11 @@ export const updateOrder = (id, orderData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-
-            }
+            },
+            withCredentials: true
         }
 
-        const { data } = await axios.put(`/api/v1/admin/order/${id}`, orderData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/admin/order/${id}`, orderData, config)
 
         dispatch({
 
@@ -238,9 +240,10 @@ export const updateBySecretaryOrder = (id, orderData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials: true
         }
-        const { data } = await axios.put(`/api/v1/secretary/order/${id}`, orderData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/secretary/order/${id}`, orderData, config)
 
         dispatch({
             type: UPDATE_ORDER_SUCCESS,

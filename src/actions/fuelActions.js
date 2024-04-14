@@ -39,8 +39,9 @@ export const createFuel = (fuelData) => async (dispatch) => {
             headers: {
                 "Content-Type": 'application/json',
             },
+            withCredentials:true
         }
-        const { data } = await axios.post('/api/v1/add-fuel', fuelData, config)
+        const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/add-fuel`, fuelData, config)
 
         dispatch({
             type: CREATE_FUEL_SUCCESS,
@@ -57,7 +58,7 @@ export const createFuel = (fuelData) => async (dispatch) => {
 export const myFuel = () => async (dispatch) => {
     try {
         dispatch({ type: MY_FUEL_REQUEST });
-        const { data } = await axios.get(`/api/v1/list-fuel`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/list-fuel`, {withCredentials:true});
         dispatch({
             type: MY_FUEL_SUCCESS,
             payload: data.userFuel,
@@ -76,9 +77,10 @@ export const updateFuel = (id, fuelData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials:true
         }
-        const { data } = await axios.put(`/api/v1/user/fuel/${id}`, fuelData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/user/fuel/${id}`, fuelData, config)
         dispatch({
             type: UPDATE_FUEL_SUCCESS,
             payload: data.success
@@ -95,7 +97,7 @@ export const getFuelDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: FUEL_DETAILS_REQUEST })
 
-        const { data } = await axios.get(`/api/v1/user/fuel/${id}`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/user/fuel/${id}`, {withCredentials:true})
 
         dispatch({
             type: FUEL_DETAILS_SUCCESS,
@@ -115,7 +117,7 @@ export const getFuelDetails = (id) => async (dispatch) => {
 export const deleteFuel = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_FUEL_REQUEST })
-        const { data } = await axios.delete(`/api/v1/user/fuel/${id}`)
+        const { data } = await axios.delete(`${process.env.REACT_APP_API}/api/v1/user/fuel/${id}`, {withCredentials:true})
         dispatch({
             type: DELETE_FUEL_SUCCESS,
             payload: data.success

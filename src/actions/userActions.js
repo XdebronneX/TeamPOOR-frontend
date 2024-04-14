@@ -78,9 +78,10 @@ export const verifyUserEmail = (token, id) => async (dispatch) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials: true
         };
 
-        const { data } = await axios.get(`/api/v1/verify/email/${token}/${id}`,config);
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/verify/email/${token}/${id}`, config);
 
         dispatch({
             type: VERIFY_USER_SUCCESS,
@@ -103,8 +104,9 @@ export const Register = (userData) => async (dispatch) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials: true
         }
-        const { data } = await axios.post('/api/v1/register', userData, config);
+        const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/register`, userData, config);
 
         dispatch({
             type: REGISTER_USER_SUCCESS,
@@ -127,8 +129,9 @@ export const Login = (email, password) => async (dispatch) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials: true
         }
-        const { data } = await axios.post('/api/v1/login', { email, password }, config);
+        const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/login`, { email, password }, config);
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data.user
@@ -147,7 +150,7 @@ export const LoadUser = () => async (dispatch) => {
         dispatch({
             type: LOAD_USER_REQUEST
         })
-        const { data } = await axios.get('/api/v1/me')
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/me`, { withCredentials: true })
         dispatch({
             type: LOAD_USER_SUCCESS,
             payload: data.user
@@ -168,8 +171,9 @@ export const updateProfile = (userData) => async (dispatch) => {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
+            withCredentials: true
         }
-        const { data } = await axios.put("/api/v1/me/update", userData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/me/update`, userData, config)
         dispatch({
             type: UPDATE_PROFILE_SUCCESS,
             payload: data.success,
@@ -191,9 +195,10 @@ export const updatePassword = (passwords) => async (dispatch) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials: true
         };
 
-        const { data } = await axios.put("/api/v1/password/update", passwords, config);
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/password/update`, passwords, config);
 
         dispatch({
             type: UPDATE_PASSWORD_SUCCESS,
@@ -218,9 +223,10 @@ export const forgotPassword = (email) => async (dispatch) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials: true
         };
 
-        const { data } = await axios.post("/api/v1/password/forgot", email, config);
+        const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/password/forgot`, email, config);
 
         dispatch({
             type: FORGOT_PASSWORD_SUCCESS,
@@ -245,13 +251,10 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials: true
         };
 
-        const { data } = await axios.put(
-            `/api/v1/password/reset/${token}`,
-            passwords,
-            config
-        );
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/password/reset/${token}`, passwords, config);
 
         dispatch({
             type: NEW_PASSWORD_SUCCESS,
@@ -270,7 +273,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 export const viewAllNotif = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_NOTIFICATION_REQUEST })
-        const { data } = await axios.get(`/api/v1/user-notification/unread`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/user-notification/unread`, { withCredentials: true });
 
         dispatch({
             type: ALL_NOTIFICATION_SUCCESS,
@@ -288,7 +291,7 @@ export const viewAllNotif = () => async (dispatch) => {
 export const updateNotifs = (id) => async (dispatch) => {
     try {
         dispatch({ type: NOTIFICATION_READ_REQUEST })
-        const { data } = await axios.put(`/api/v1/user-notification/${id}`)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/user-notification/${id}`, { withCredentials: true })
         dispatch({
             type: NOTIFICATION_READ_SUCCESS,
             payload: data
@@ -305,7 +308,7 @@ export const updateNotifs = (id) => async (dispatch) => {
 export const viewAllUsers = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_USERS_REQUEST })
-        const { data } = await axios.get('/api/v1/admin/view/all/users')
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/view/all/users`, { withCredentials: true })
 
         dispatch({
             type: ALL_USERS_SUCCESS,
@@ -323,7 +326,7 @@ export const viewAllUsers = () => async (dispatch) => {
 export const viewAllSuppliers = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_SUPPLIERS_REQUEST })
-        const { data } = await axios.get('/api/v1/admin/view/all/suppliers')
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/view/all/suppliers`, { withCredentials: true })
 
         dispatch({
             type: ALL_SUPPLIERS_SUCCESS,
@@ -345,9 +348,10 @@ export const updateUser = (id, userData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials: true
         }
-        const { data } = await axios.put(`/api/v1/admin/users/${id}`, userData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/admin/users/${id}`, userData, config)
         dispatch({
             type: UPDATE_USER_SUCCESS,
             payload: data.success
@@ -365,7 +369,7 @@ export const getUserDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: USER_DETAILS_REQUEST })
 
-        const { data } = await axios.get(`/api/v1/admin/users/${id}`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/users/${id}`, { withCredentials: true })
 
         dispatch({
             type: USER_DETAILS_SUCCESS,
@@ -386,7 +390,7 @@ export const getUserDetails = (id) => async (dispatch) => {
 export const deleteUser = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_USER_REQUEST })
-        const { data } = await axios.delete(`/api/v1/admin/users/${id}`)
+        const { data } = await axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/users/${id}`, { withCredentials: true });
         dispatch({
             type: DELETE_USER_SUCCESS,
             payload: data.success
@@ -402,7 +406,7 @@ export const deleteUser = (id) => async (dispatch) => {
 
 export const Logout = () => async (dispatch) => {
     try {
-        await axios.get('/api/v1/logout')
+        await axios.get(`${process.env.REACT_APP_API}/api/v1/logout`, { withCredentials: true });
         dispatch({
             type: LOGOUT_SUCCESS
         })

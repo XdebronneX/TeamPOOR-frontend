@@ -32,9 +32,10 @@ export const createCategory = (categoryData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data'
-            }
+            },
+            withCredentials:true
         }
-        const { data } = await axios.post(`/api/v1/add/category/new`, categoryData, config)
+        const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/add/category/new`, categoryData, config)
         dispatch({
             type: CREATE_CATEGORY_SUCCESS,
             payload: data
@@ -50,7 +51,7 @@ export const createCategory = (categoryData) => async (dispatch) => {
 export const viewAllCategories = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_CATEGORY_REQUEST });
-        const { data } = await axios.get('/api/v1/admin/view/all/category');
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/view/all/category`, {withCredentials:true});
 
         dispatch({
             type: ALL_CATEGORY_SUCCESS,
@@ -68,7 +69,7 @@ export const getCategoryDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: CATEGORY_DETAILS_REQUEST })
 
-        const { data } = await axios.get(`/api/v1/admin/category/${id}`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/category/${id}`, {withCredentials:true})
 
         dispatch({
             type: CATEGORY_DETAILS_SUCCESS,
@@ -91,9 +92,10 @@ export const updateCategory = (id, categoryData) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials:true
         }
-        const { data } = await axios.put(`/api/v1/admin/category/${id}`, categoryData, config)
+        const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/admin/category/${id}`, categoryData, config)
         dispatch({
             type: UPDATE_CATEGORY_SUCCESS,
             payload: data.success
@@ -109,7 +111,7 @@ export const updateCategory = (id, categoryData) => async (dispatch) => {
 export const deleteCategory = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_CATEGORY_REQUEST })
-        const { data } = await axios.delete(`/api/v1/admin/category/${id}`)
+        const { data } = await axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/category/${id}`, {withCredentials:true})
         dispatch({
             type: DELETE_CATEGORY_SUCCESS,
             payload: data.success

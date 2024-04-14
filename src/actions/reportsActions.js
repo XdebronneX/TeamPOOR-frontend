@@ -25,9 +25,10 @@ export const monthlySalesChart = () => async (dispatch) => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials: true
         }
         dispatch({ type: MONTHLY_SALES_REQUEST })
-        const { data } = await axios.get(`/api/v1/products/sales`, config)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/products/sales`, config)
         dispatch({
             type: MONTHLY_SALES_SUCCESS,
             payload: data.monthlySales,
@@ -47,9 +48,10 @@ export const mostLoyalChart = () => async (dispatch) => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials: true
         }
         dispatch({ type: MOST_LOYAL_REQUEST })
-        const { data } = await axios.get(`/api/v1/most/loyal-user`, config)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/most/loyal-user`, config)
         dispatch({
             type: MOST_LOYAL_SUCCESS,
             payload: data.mostPurchasedUser,
@@ -69,9 +71,10 @@ export const mostProductChart = () => async (dispatch) => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials: true
         }
         dispatch({ type: PRODUCT_SALES_REQUEST })
-        const { data } = await axios.get(`/api/v1/most/purchased-product`, config)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/most/purchased-product`, config)
         dispatch({
             type: PRODUCT_SALES_SUCCESS,
             payload: data.mostPurchasedProduct,
@@ -91,9 +94,10 @@ export const mostBrandChart = () => async (dispatch) => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials:true
         }
         dispatch({ type: MOST_BRAND_REQUEST })
-        const { data } = await axios.get(`/api/v1/most/purchased-brand`, config)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/most/purchased-brand`, config)
         dispatch({
             type: MOST_BRAND_SUCCESS,
             payload: data.mostPurchasedBrand,
