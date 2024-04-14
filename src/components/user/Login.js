@@ -75,27 +75,39 @@ const Logins = () => {
     //     }
     // }, [dispatch, isAuthenticated, error, navigate, buttonClicked,redirect]);
 
+    // useEffect(() => {
+    //     if (isAuthenticated && redirect === "shipping") {
+
+    //         navigate(`/${redirect}`, { replace: true });
+    //     } 
+    //     // if (isAuthenticated && redirect === "booking") {
+
+    //     //     navigate(`/${redirect}`, { replace: true });
+    //     // }
+    //     else if (isAuthenticated) {
+    //         handleSuccess("Logged in successfully!");
+    //         navigate("/");
+    //     }
+    //     else if (error && buttonClicked) {
+    //         handleError(error);
+    //         dispatch(clearErrors());
+    //     }
+    // }, [dispatch, isAuthenticated, error, navigate, redirect, buttonClicked]);
+
     useEffect(() => {
         if (isAuthenticated && redirect === "shipping") {
 
             navigate(`/${redirect}`, { replace: true });
-        } 
-        // if (isAuthenticated && redirect === "booking") {
-
-        //     navigate(`/${redirect}`, { replace: true });
-        // }
-        else if (isAuthenticated) {
-            handleSuccess("Logged in successfully!");
-            navigate("/");
-        }
-        else if (error && buttonClicked) {
-            handleError(error);
+        } else if (isAuthenticated) navigate("/");
+        if (error) {
+            // alert.error(error);
+            notify(error);
             dispatch(clearErrors());
         }
-    }, [dispatch, isAuthenticated, error, navigate, redirect, buttonClicked]);
+    }, [dispatch, isAuthenticated, error, navigate, redirect]);
 
     const submitHandler = (data) => {
-        setButtonClicked(true);
+        // setButtonClicked(true);
         dispatch(Login(data.email, data.password));
     };
 
