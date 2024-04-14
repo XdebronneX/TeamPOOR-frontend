@@ -25,7 +25,7 @@ const Shipping = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { user } = useSelector((state) => state.authUser);
-    const { userAddresses, error, loading } = useSelector(
+    const { userAddresses, loading } = useSelector(
         (state) => state.myAddresses
     );
     const { shippingInfo } = useSelector((state) => state.cart);

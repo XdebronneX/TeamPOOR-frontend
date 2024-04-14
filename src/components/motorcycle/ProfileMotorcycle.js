@@ -21,7 +21,7 @@ import { FaPlusCircle } from "react-icons/fa";
 const ProfileMotorcycle = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userMotorcycles, error, loading } = useSelector((state) => state.myMotor);
+  const { userMotorcycles, loading } = useSelector((state) => state.myMotor);
 
   useEffect(() => {
     dispatch(myMotorcycle());
