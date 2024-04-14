@@ -96,12 +96,13 @@ const Logins = () => {
 
     useEffect(() => {
         if (isAuthenticated && redirect === "shipping") {
-
+            handleSuccess("Successfully Logged in!");
             navigate(`/${redirect}`, { replace: true });
+
         } else if (isAuthenticated) navigate("/");
         if (error) {
             // alert.error(error);
-            notify(error);
+            handleError(error);
             dispatch(clearErrors());
         }
     }, [dispatch, isAuthenticated, error, navigate, redirect]);
