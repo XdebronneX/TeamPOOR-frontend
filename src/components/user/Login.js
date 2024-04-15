@@ -219,7 +219,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, clearErrors } from '../../actions/userActions';
+import { Login, clearErrors } from '../../actions/userActions';
 import { useForm, Controller } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import Loader from '../layout/Loader';
@@ -266,7 +266,7 @@ const Logins = () => {
     };
 
     const submitHandler = (data) => {
-        dispatch(login(data.email, data.password));
+        dispatch(Login(data.email, data.password));
         setRedirect(location.search ? location.search.split('=')[1] : '');
     };
 
