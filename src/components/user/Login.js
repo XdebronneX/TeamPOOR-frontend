@@ -230,7 +230,7 @@ import {
     Link, Box, useColorModeValue,
 } from '@chakra-ui/react';
 
-const Login = () => {
+const Logins = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
@@ -390,4 +390,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Logins;
