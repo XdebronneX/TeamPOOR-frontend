@@ -431,7 +431,7 @@ const Header = () => {
                   </Menu>
                 ) : (
                   !loading && (
-                      <Link onClick={ProfileHandler}>
+                      <Link onClick={LoginHandler}>
                       <Box className="font-semibold text-black">
                         <p>LOGIN</p>
                       </Box>
