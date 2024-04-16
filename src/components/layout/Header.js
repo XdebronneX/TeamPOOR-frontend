@@ -304,7 +304,6 @@ const Header = () => {
                 onClick={CartHandler}
               >
                 <CgShoppingCart color="#b91c1c" />
-
                 {cartItems.length > 0 && (
                   <Box
                     className="absolute -top-1 -right-1 bg-red-500 rounded-full px-1  h-5 w-5 items-center justify-center flex"
@@ -333,7 +332,6 @@ const Header = () => {
               <Button onClick={handleShowModalNotif}>
                 <FiBell boxSize={6} color="gray.600" />
                 <Badge colorScheme="red" variant="solid" ml={1}>
-                  {/* {unreadNotifications.length} */}
                   {unreadNotifications.filter(unreadNotification => !isUnreadNotificationClicked(unreadNotification._id)).length}
                 </Badge>
               </Button>
@@ -349,7 +347,6 @@ const Header = () => {
                           size="sm"
                           src={user.avatar && user.avatar.url}
                         />
-
                         <Text className="text-black font-semibold hidden sm:block">
                           {user.firstname} {user.lastname}
                         </Text>
@@ -427,19 +424,16 @@ const Header = () => {
                     </MenuList>
                   </Menu>
                 ) : (
-                  !loading && (
-                    <Link to="/login">
-                      <Box className="font-semibold text-black">
-                        <p>LOGIN</p>
-                      </Box>
-                    </Link>
-                  )
+                  <Link to="/login" className="text-black font-semibold">
+                    LOGIN
+                  </Link>
                 )}
               </Stack>
             </Flex>
           </Box>
         </div>
       </div>
+
       <Modal isOpen={showModal} onClose={handleCloseModal}>
         <ModalOverlay />
         <ModalContent>
