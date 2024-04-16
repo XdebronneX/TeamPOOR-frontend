@@ -236,7 +236,7 @@ const Logins = () => {
     const location = useLocation();
     const { isAuthenticated, error, loading } = useSelector((state) => state.authUser);
     const { handleSubmit, control, formState: { errors } } = useForm();
-    const redirect = location.search ? location.search.split("=")[1] : "";
+    let redirect = location.search ? location.search.split("=")[1] : "";
 
     useEffect(() => {
         if (isAuthenticated) {
