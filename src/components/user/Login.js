@@ -234,7 +234,8 @@ const Logins = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
-
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const { isAuthenticated, error, loading } = useSelector((state) => state.authUser);
     const { handleSubmit, control, formState: { errors } } = useForm();
     const [redirect, setRedirect] = useState('');
@@ -265,8 +266,9 @@ const Logins = () => {
         });
     };
 
-    const submitHandler = (data) => {
-        dispatch(Login(data.email, data.password));
+    const submitHandler = (e) => {
+        e.preventDefault();
+        dispatch(Login(email, password));
         setRedirect(location.search ? location.search.split('=')[1] : '');
     };
 
