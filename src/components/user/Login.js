@@ -265,7 +265,7 @@ const Logins = () => {
         });
     };
 
-    const submitHandler = () => {
+    const submitHandler = (data) => {
         dispatch(Login(data.email, data.password));
     };
 
