@@ -234,8 +234,6 @@ const Logins = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const { isAuthenticated, error, loading } = useSelector((state) => state.authUser);
     const { handleSubmit, control, formState: { errors } } = useForm();
     const redirect = location.search ? location.search.split("=")[1] : "";
@@ -268,7 +266,7 @@ const Logins = () => {
     };
 
     const submitHandler = () => {
-        dispatch(Login(email, password));
+        dispatch(Login(data.email, data.password));
     };
 
     const registerHandler = () => {
