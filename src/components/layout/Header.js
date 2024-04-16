@@ -431,11 +431,11 @@ const Header = () => {
                   </Menu>
                 ) : (
                   !loading && (
-                      <Link onClick={LoginHandler}>
+                    <Button onClick={LoginHandler}>
                       <Box className="font-semibold text-black">
                         <p>LOGIN</p>
                       </Box>
-                    </Link>
+                    </Button>
                   )
                 )}
               </Stack>
