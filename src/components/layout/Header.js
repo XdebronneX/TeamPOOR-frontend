@@ -109,6 +109,9 @@ const Header = () => {
   const ProfileHandler = () => {
     navigate("/profile");
   };
+  const LoginHandler = () => {
+    navigate("/login");
+  };
 
   const myOrderHandler = () => {
     navigate("/orders/me");
@@ -428,7 +431,7 @@ const Header = () => {
                   </Menu>
                 ) : (
                   !loading && (
-                    <Link to="/login">
+                      <Link onClick={ProfileHandler}>
                       <Box className="font-semibold text-black">
                         <p>LOGIN</p>
                       </Box>
