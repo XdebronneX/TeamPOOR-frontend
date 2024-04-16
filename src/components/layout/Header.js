@@ -430,7 +430,7 @@ const Header = () => {
                   !loading && (
                     <Link to="/login">
                       <Box className="font-semibold text-black">
-                        LOGIN
+                        <p>LOGIN</p>
                       </Box>
                     </Link>
                   )
