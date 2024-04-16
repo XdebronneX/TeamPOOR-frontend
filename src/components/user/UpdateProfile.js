@@ -17,7 +17,7 @@ import {
     Input,
     Stack,
     useColorModeValue,
-    useToast,
+    // useToast,
     Avatar,
     AvatarBadge,
     IconButton,
@@ -29,11 +29,12 @@ import {
     Box,
 } from "@chakra-ui/react";
 import { FaImages } from "react-icons/fa6";
+import { toast } from 'react-toastify';
 
 const UpdateProfile = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const toast = useToast();
+    // const toast = useToast();
     const inputRef = useRef();
 
     const { user } = useSelector((state) => state.authUser);
@@ -57,25 +58,37 @@ const UpdateProfile = () => {
         formState: { errors },
     } = useForm();
 
-    const handleSuccess = (message) => {
-        toast({
-            title: "Success!",
-            description: message,
-            status: "info",
-            duration: 2000,
-            isClosable: true,
-            position: "bottom-left",
+    // const handleSuccess = (message) => {
+    //     toast({
+    //         title: "Success!",
+    //         description: message,
+    //         status: "info",
+    //         duration: 2000,
+    //         isClosable: true,
+    //         position: "bottom-left",
+    //     });
+    // };
+
+    // const handleError = (message) => {
+    //     toast({
+    //         title: "Error!",
+    //         description: message,
+    //         status: "error",
+    //         duration: 2000,
+    //         isClosable: true,
+    //         position: "bottom-left",
+    //     });
+    // };
+
+    const handleSuccess = (message = '') => {
+        toast.success(message, {
+            position: toast.POSITION.BOTTOM_CENTER,
         });
     };
 
-    const handleError = (message) => {
-        toast({
-            title: "Error!",
-            description: message,
-            status: "error",
-            duration: 2000,
-            isClosable: true,
-            position: "bottom-left",
+    const handleError = (error = '') => {
+        toast.error(error, {
+            position: toast.POSITION.BOTTOM_CENTER,
         });
     };
 

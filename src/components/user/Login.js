@@ -245,6 +245,7 @@ const Logins = () => {
             if (redirect === 'shipping' || redirect === 'booking') {
                 navigate(`/${redirect}`, { replace: true });
             } else {
+                handleSuccess("You have successfully logged in.");
                 navigate('/');
             }
         }

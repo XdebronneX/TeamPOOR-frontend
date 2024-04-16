@@ -11,11 +11,12 @@ import {
     Input,
     Stack,
     useColorModeValue,
-    useToast,
+    // useToast,
     InputRightElement,
     InputGroup,
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { toast } from 'react-toastify';
 
 const NewPassword = () => {
     const navigate = useNavigate();
@@ -26,30 +27,42 @@ const NewPassword = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const { error, success } = useSelector((state) => state.forgotPassword);
-    const toast = useToast();  // Add this line
+    // const toast = useToast();  // Add this line
 
-    const handleSuccess = () => {
-        toast({
-            title: 'Success!',
-            description: 'Password reset successfully',
-            status: 'info',
-            duration: 3000,
-            isClosable: true,
-            position: 'bottom-left',
+    // const handleSuccess = () => {
+    //     toast({
+    //         title: 'Success!',
+    //         description: 'Password reset successfully',
+    //         status: 'info',
+    //         duration: 3000,
+    //         isClosable: true,
+    //         position: 'bottom-left',
+    //     });
+    // };
+
+    // const handleError = (message) => {
+    //     toast({
+    //         title: 'Error!',
+    //         description: message,
+    //         status: 'error',
+    //         duration: 3000,
+    //         isClosable: true,
+    //         position: 'bottom-left',
+    //     });
+    // };
+
+    const handleSuccess = (message = '') => {
+        toast.success(message, {
+            position: toast.POSITION.BOTTOM_CENTER,
         });
     };
 
-    const handleError = (message) => {
-        toast({
-            title: 'Error!',
-            description: message,
-            status: 'error',
-            duration: 3000,
-            isClosable: true,
-            position: 'bottom-left',
+    const handleError = (error = '') => {
+        toast.error(error, {
+            position: toast.POSITION.BOTTOM_CENTER,
         });
     };
-
+    
     useEffect(() => {
         if (error) {
             handleError(error);

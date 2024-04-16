@@ -16,7 +16,7 @@ import {
     useColorModeValue,
     Image,
     Link,
-    useToast,
+    // useToast,
     InputGroup,
     InputLeftAddon
 } from '@chakra-ui/react';
@@ -24,35 +24,48 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import 'react-phone-number-input/style.css';
 import { REGISTER_USER_RESET } from '../../constants/userConstants';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
 const Registers = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const toast = useToast();
+    // const toast = useToast();
     const { error, success, loading, message } = useSelector((state) => state.authUser);
     const { handleSubmit, control, formState: { errors }, register } = useForm();
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleSuccess = (message) => {
-        toast({
-            title: "Success!",
-            description: message,
-            status: "info",
-            duration: 3000,
-            isClosable: true,
+    // const handleSuccess = (message) => {
+    //     toast({
+    //         title: "Success!",
+    //         description: message,
+    //         status: "info",
+    //         duration: 3000,
+    //         isClosable: true,
+    //     });
+    // };
+
+    // const handleError = (message) => {
+    //     toast({
+    //         title: "Error!",
+    //         description: message,
+    //         status: "error",
+    //         duration: 3000,
+    //         isClosable: true,
+    //     });
+    // };
+
+    const handleSuccess = (message = '') => {
+        toast.success(message, {
+            position: toast.POSITION.BOTTOM_CENTER,
         });
     };
 
-    const handleError = (message) => {
-        toast({
-            title: "Error!",
-            description: message,
-            status: "error",
-            duration: 3000,
-            isClosable: true,
+    const handleError = (error = '') => {
+        toast.error(error, {
+            position: toast.POSITION.BOTTOM_CENTER,
         });
     };
-
+    
     useEffect(() => {
         if (error) {
             handleError(error);

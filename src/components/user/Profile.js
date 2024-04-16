@@ -9,7 +9,7 @@ import {
     Stack,
     Heading,
     Flex,
-    useToast,
+    // useToast,
     Table,
     Tbody,
     Td,
@@ -35,11 +35,12 @@ import { FaGasPump } from 'react-icons/fa';
 import { myOrders, allOrders, listOrders } from '../../actions/orderActions';
 import { RiCurrencyFill } from "react-icons/ri";
 import { MDBDataTable } from 'mdbreact';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const toast = useToast();
+    // const toast = useToast();
     const { user, loading: loadingUsers } = useSelector((state) => state.authUser);
     const { userAddresses, error, loading: loadingAddresses } = useSelector((state) => state.myAddresses);
     const { isUpdated } = useSelector((state) => state.userControl);
@@ -72,24 +73,36 @@ const Profile = () => {
         dispatch(updateDefaultAddresses(id));
     };
 
-    const showErrorToast = (message) => {
-        toast({
-            title: 'Error',
-            description: message,
-            status: 'error',
-            position: 'bottom-center',
-            duration: 3000,
-            isClosable: true,
+    // const showErrorToast = (message) => {
+    //     toast({
+    //         title: 'Error',
+    //         description: message,
+    //         status: 'error',
+    //         position: 'bottom-center',
+    //         duration: 3000,
+    //         isClosable: true,
+    //     });
+    // };
+    // const showSuccessToast = (message) => {
+    //     toast({
+    //         title: 'Success',
+    //         description: message,
+    //         status: 'success',
+    //         position: 'bottom-center',
+    //         duration: 3000,
+    //         isClosable: true,
+    //     });
+    // };
+
+    const handleSuccess = (message = '') => {
+        toast.success(message, {
+            position: toast.POSITION.BOTTOM_CENTER,
         });
     };
-    const showSuccessToast = (message) => {
-        toast({
-            title: 'Success',
-            description: message,
-            status: 'success',
-            position: 'bottom-center',
-            duration: 3000,
-            isClosable: true,
+
+    const handleError = (error = '') => {
+        toast.error(error, {
+            position: toast.POSITION.BOTTOM_CENTER,
         });
     };
 
@@ -132,11 +145,11 @@ const Profile = () => {
             dispatch(listOrders());
         }
         if (error) {
-            showErrorToast(error);
+            handleError(error);
             dispatch(clearErrors());
         }
         if (isUpdated) {
-            showSuccessToast("Set new default address!");
+            handleSuccess("Set new default address!");
             setTimeout(() => {
                 dispatch({ type: UPDATE_ADDRESSES_RESET });
             });
