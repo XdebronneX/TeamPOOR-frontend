@@ -109,9 +109,6 @@ const Header = () => {
   const ProfileHandler = () => {
     navigate("/profile");
   };
-  const LoginHandler = () => {
-    navigate("/login");
-  };
 
   const myOrderHandler = () => {
     navigate("/orders/me");
