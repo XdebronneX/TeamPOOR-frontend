@@ -266,8 +266,7 @@ const Logins = () => {
         });
     };
 
-    const submitHandler = (e) => {
-        e.preventDefault();
+    const submitHandler = () => {
         dispatch(Login(email, password));
         setRedirect(location.search ? location.search.split('=')[1] : '');
     };
