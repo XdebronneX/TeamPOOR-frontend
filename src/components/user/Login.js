@@ -238,7 +238,7 @@ const Logins = () => {
     const [password, setPassword] = useState('');
     const { isAuthenticated, error, loading } = useSelector((state) => state.authUser);
     const { handleSubmit, control, formState: { errors } } = useForm();
-    const [redirect, setRedirect] = useState('');
+    const redirect = location.search ? location.search.split("=")[1] : "";
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -269,7 +269,6 @@ const Logins = () => {
 
     const submitHandler = () => {
         dispatch(Login(email, password));
-        setRedirect(location.search ? location.search.split('=')[1] : '');
     };
 
     const registerHandler = () => {
