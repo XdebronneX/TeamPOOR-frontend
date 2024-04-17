@@ -127,7 +127,7 @@ export const LoginUsers = (email, password) => async (dispatch) => {
         })
         const config = {
             headers: {
-                "Content-Type": "multipart/form-data",
+                "Content-Type": "application/json",
             },
             withCredentials: true
         }
