@@ -93,7 +93,6 @@ const Products = () => {
                         loading="lazy"
                         cover="contain"
                         className={product.stock <= 0 ? "grayscale" : ""}
-                        pointerEvents={product.stock === 0 ? 'none' : 'auto'}
                       />
                       {product.stock <= 0 && (
                         <Image
