@@ -84,6 +84,7 @@ const Products = () => {
                     <Link
                       to={`/showSingleProduct/${product._id}`}
                       className="relative items-center justify-center"
+                      pointerEvents={product.stock === 0 ? 'none' : 'auto'}
                     >
                       <Image
                         src={product.images[0].url}
@@ -92,6 +93,7 @@ const Products = () => {
                         loading="lazy"
                         cover="contain"
                         className={product.stock <= 0 ? "grayscale" : ""}
+                        pointerEvents={product.stock === 0 ? 'none' : 'auto'}
                       />
                       {product.stock <= 0 && (
                         <Image
