@@ -84,7 +84,6 @@ const Products = () => {
                     <Link
                       to={`/showSingleProduct/${product._id}`}
                       className="relative items-center justify-center"
-                      disabled
                     >
                       <Image
                         src={product.images[0].url}
@@ -151,6 +150,7 @@ const Products = () => {
                           type="button"
                           className="items-center justify-center bg-red-500 text-white font-semibold rounded-full px-3 p-2"
                           onClick={() => SingleProductHandler(product._id)}
+                          pointerEvents={product.stock === 0 ? 'none' : 'auto'}
                         >
                           <Text className="flex flex-row items-center">
                             <p>+ </p>
@@ -184,7 +184,6 @@ const Products = () => {
                       <Link
                         to={`/showSingleProduct/${product._id}`}
                         className="relative items-center justify-center"
-                        disabled
                       >
                         <Image
                           src={product.images[0].url}
