@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate , useLocation} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Login, clearErrors } from '../../actions/userActions';
+import { LoginUsers, clearErrors } from '../../actions/userActions';
 import { useForm, Controller } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import Loader from '../layout/Loader';
@@ -50,7 +50,7 @@ const Logins = () => {
 
     const submitHandler = (data) => {
         setButtonClicked(true);
-        dispatch(Login(data.email, data.password));
+        dispatch(LoginUsers(data.email, data.password));
     };
 
     const RegisterHandler = () => {

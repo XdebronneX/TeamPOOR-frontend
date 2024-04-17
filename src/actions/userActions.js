@@ -120,7 +120,7 @@ export const Register = (userData) => async (dispatch) => {
     }
 }
 
-export const Login = (email, password) => async (dispatch) => {
+export const LoginUsers = (email, password) => async (dispatch) => {
     try {
         dispatch({
             type: LOGIN_REQUEST
