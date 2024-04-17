@@ -13,7 +13,12 @@ import { FaPlusCircle, FaGasPump } from "react-icons/fa";
 import { RiCurrencyFill } from "react-icons/ri";
 import { MDBDataTable } from 'mdbreact';
 import { toast } from 'react-toastify';
-
+import {
+    regions,
+    provinces,
+    cities,
+    barangays,
+} from "select-philippines-address";
 const Profile = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
