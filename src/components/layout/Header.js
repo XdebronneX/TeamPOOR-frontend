@@ -297,7 +297,6 @@ const Header = () => {
           {/* User actions */}
           <Box className="flex flex-row space-x-5 items-center">
             {/* Cart button */}
-            {user && user.role === "user" && (
               <Button
                 className="relative p-2 bg-red-200 rounded-full"
                 colorScheme="#b91c1c"
@@ -314,7 +313,6 @@ const Header = () => {
                   </Box>
                 )}
               </Button>
-            )}
 
             {/* Bell icon with notification badge */}
             {user && user.role === "admin" && (
