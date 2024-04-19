@@ -48,92 +48,6 @@ const OrdersList = () => {
     dispatch(deleteOrder(id));
   };
 
-  // const setOrders = () => {
-  //     const data = {
-  //         columns: [
-  //             {
-  //                 label: 'Order ID',
-  //                 field: 'id',
-  //                 sort: 'asc'
-  //             },
-  //             {
-  //                 label: 'No of Items',
-  //                 field: 'numofItems',
-  //                 sort: 'asc'
-  //             },
-  //             {
-  //                 label: 'Amount',
-  //                 field: 'amount',
-  //                 sort: 'asc'
-  //             },
-  //             {
-  //                 label: 'Status',
-  //                 field: 'status',
-  //                 sort: 'asc'
-  //             },
-  //             {
-  //                 label: 'Actions',
-  //                 field: 'actions',
-  //             },
-  //         ],
-  //         rows: []
-  //     };
-
-  //     orders.forEach(order => {
-  //         const sortedStatus = order.orderStatus.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-  //         const latestStatus = sortedStatus.length > 0 ? sortedStatus[0].status : 'No status';
-
-  //         let badgeColor = '';
-  //         let badgeText = '';
-
-  //         switch (latestStatus) {
-  //             case 'Pending':
-  //             case 'ToPay':
-  //             case 'To Ship':
-  //             case 'To Received':
-  //             case 'Failed Attempt':
-  //                 badgeColor = 'primary';
-  //                 badgeText = latestStatus;
-  //                 break;
-  //             case 'Cancelled':
-  //             case 'Returned':
-  //                 badgeColor = 'danger';
-  //                 badgeText = latestStatus;
-  //                 break;
-  //             case 'Received':
-  //                 badgeColor = 'success';
-  //                 badgeText = latestStatus;
-  //                 break;
-  //             default:
-  //                 badgeText = 'No status';
-  //         }
-
-  //         data.rows.push({
-  //             id: order._id,
-  //             numofItems: order.orderItems.length,
-  //             amount: `$${order.totalPrice}`,
-  //             status: (
-  //                 <span className={`badge badge-${badgeColor}`}>
-  //                     {badgeText}
-  //                 </span>
-  //             ),
-  //             actions: (
-
-  //                 <Fragment>
-  //                     <Link to={`/admin/order/${order._id}`} className="btn btn-primary py-1 px-2">
-  //                         <i className="fa fa-eye"></i>
-  //                     </Link>
-  //                     <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteOrderHandler(order._id)}>
-  //                         <i className="fa fa-trash"></i>
-  //                     </button>
-  //                 </Fragment>
-  //             ),
-  //         });
-  //     });
-
-  //     return data;
-  // };
-
   const setOrders = () => {
     const data = {
       columns: [
@@ -284,7 +198,7 @@ const OrdersList = () => {
           <Stack>
             <Heading> All Orders</Heading>
           </Stack>
-          {loading ? (
+          {!loading ? (
             <Loader />
           ) : (
             <MDBDataTable

@@ -38,59 +38,6 @@ const ProductStockList = () => {
     }
   }, [dispatch, error, navigate]);
 
-  // const setProductData = () => {
-  //     const data = {
-  //         columns: [
-  //             {
-  //                 label: 'Product ID',
-  //                 field: 'id',
-  //                 sort: 'asc',
-  //             },
-  //             {
-  //                 label: 'Product name',
-  //                 field: 'name',
-  //                 sort: 'asc',
-  //             },
-  //             {
-  //                 label: 'Product brand',
-  //                 field: 'brand',
-  //                 sort: 'asc',
-  //             },
-  //             {
-  //                 label: 'Stock',
-  //                 field: 'stock',
-  //                 sort: 'asc',
-  //             },
-  //             {
-  //                 label: 'Edit',
-  //                 field: 'edit',
-  //                 sort: 'disabled',
-  //             },
-  //         ],
-  //         rows: [],
-  //     };
-
-  //     products.forEach((product) => {
-  //         data.rows.push({
-  //             id: product._id,
-  //             name: product.name,
-  //             brand: product.brand.name,
-  //             stock: `${product.stock.toLocaleString()}`,
-  //             edit: (
-  //                 <Fragment>
-  //                     <Link to={`/admin/stock/${product._id}`}>
-  //                         <Button colorScheme="blue" size="sm" ml="3" leftIcon={<FaPencilAlt />}>
-  //                             Edit
-  //                         </Button>
-  //                     </Link>
-  //                 </Fragment>
-  //             ),
-  //         });
-  //     });
-
-  //     return data;
-  // };
-
   const setProductData = () => {
     const data = {
       columns: [
@@ -212,7 +159,7 @@ const ProductStockList = () => {
           <Stack>
             <Heading>All Stocks</Heading>{" "}
           </Stack>
-          {loading ? (
+          {!loading ? (
             <Loader />
           ) : (
             <MDBDataTable

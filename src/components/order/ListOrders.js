@@ -150,7 +150,7 @@ const ListOrders = () => {
                     Order List
                 </Heading>
             </Flex>
-            {loading ? (
+            {!loading ? (
                 <Loader />
             ) : (
                 <Fragment>

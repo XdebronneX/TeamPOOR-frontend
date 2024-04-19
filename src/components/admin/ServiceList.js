@@ -40,81 +40,6 @@ const ServiceList = () => {
     dispatch(deleteService(id));
   };
 
-  // const setServiceData = () => {
-  //     const data = {
-  //         columns: [
-  //             {
-  //                 label: 'Service ID',
-  //                 field: 'id',
-  //                 sort: 'asc',
-  //             },
-  //             {
-  //                 label: 'Name',
-  //                 field: 'name',
-  //                 sort: 'asc',
-  //             },
-  //             {
-  //                 label: 'Price',
-  //                 field: 'price',
-  //                 sort: 'asc',
-  //             },
-  //             {
-  //                 label: 'Description',
-  //                 field: 'description',
-  //                 sort: 'asc',
-  //             },
-  //             {
-  //                 label: 'Status',
-  //                 field: 'isAvailable',
-  //                 sort: 'asc',
-  //             },
-  //             {
-  //                 label: 'Edit',
-  //                 field: 'edit',
-  //             },
-  //             {
-  //                 label: 'Delete',
-  //                 field: 'delete',
-  //             },
-  //         ],
-  //         rows: [],
-  //     };
-
-  //     services.forEach((service) => {
-  //         data.rows.push({
-  //             id: service._id,
-  //             name: service.name,
-  //             description: service.description,
-  //             price: service.price,
-  //             isAvailable: service.isAvailable,
-  //             edit: (
-  //                 <Fragment>
-  //                     <Link to={`/admin/service/${service._id}`}>
-  //                         <Button colorScheme="blue" size="sm" ml="3" leftIcon={<FaPencilAlt />}>
-  //                             Edit
-  //                         </Button>
-  //                     </Link>
-  //                 </Fragment>
-  //             ),
-  //             delete: (
-  //                 <Fragment>
-  //                     <Button
-  //                         colorScheme="red"
-  //                         size="sm"
-  //                         ml="3" // Adjust this value for spacing
-  //                         onClick={() => deleteServiceHandler(service._id)}
-  //                         leftIcon={<FaTrash />}
-  //                     >
-  //                         Delete
-  //                     </Button>
-  //                 </Fragment>
-  //             ),
-  //         });
-  //     });
-
-  //     return data;
-  // };
-
   const setServiceData = () => {
     const data = {
       columns: [
@@ -233,7 +158,7 @@ const ServiceList = () => {
           <Stack>
             <Heading> All Services</Heading>{" "}
           </Stack>
-          {loading ? (
+          {!loading ? (
             <Loader />
           ) : (
             <MDBDataTable

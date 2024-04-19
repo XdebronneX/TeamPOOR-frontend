@@ -25,56 +25,6 @@ const SuppliedProductLogs = () => {
     }
   }, [dispatch, error, navigate]);
 
-  // const setSuppliedData = () => {
-  //     const data = {
-  //         columns: [
-  //             {
-  //                 label: 'Idddddd',
-  //                 field: 'id',
-  //                 sort: 'asc',
-  //             },
-  //             {
-  //                 label: 'Date Delivered',
-  //                 field: 'createdAt',
-  //                 sort: 'asc',
-  //             },
-  //             {
-  //                 label: 'Supplied By',
-  //                 field: 'by',
-  //                 sort: 'disabled',
-  //             },
-  //             {
-  //                 label: 'View',
-  //                 field: 'view',
-  //                 sort: 'disabled',
-  //             },
-  //         ],
-  //         rows: [],
-  //     };
-
-  //     if (suppliedHistoryLog && suppliedHistoryLog.length > 0) {
-  //         suppliedHistoryLog.forEach((supplied) => {
-  //             const createdAt = new Date(supplied.dateDelivered);
-  //             const formattedDateTime = `${createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: '2-digit' })}, ${createdAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit' })}`;
-
-  //             supplied.products.forEach((product) => {
-  //                 data.rows.push({
-  //                     id: supplied._id,
-  //                     by: supplied.supplier.firstname,
-  //                     createdAt: formattedDateTime,
-  //                     view: (
-  //                         <Link to={`/admin/single/supplied/${supplied._id}`} className="btn btn-primary py-1 px-2">
-  //                             <CiRead />
-  //                         </Link>
-  //                     ),
-  //                 });
-  //             });
-  //         });
-  //     }
-
-  //     return data;
-  // };
-
   const setSuppliedData = () => {
     const data = {
       columns: [
@@ -175,7 +125,7 @@ const SuppliedProductLogs = () => {
           <Stack>
             <Heading>Supplied Product Logs History</Heading>{" "}
           </Stack>
-          {loading ? (
+          {!loading ? (
             <Loader />
           ) : (
             <MDBDataTable
