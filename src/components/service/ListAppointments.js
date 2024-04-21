@@ -171,106 +171,210 @@ const ListAppointments = () => {
             rows: [],
         };
 
-        bookings.forEach((booking) => {
-            const appointmentStatus = booking.appointmentStatus || [];
-            const sortedStatus = appointmentStatus.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-            const latestStatus = sortedStatus.length > 0 ? sortedStatus[0].status : 'No status';
+        // bookings.forEach((booking) => {
+        //     const appointmentStatus = booking.appointmentStatus || [];
+        //     const sortedStatus = appointmentStatus.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        //     const latestStatus = sortedStatus.length > 0 ? sortedStatus[0].status : 'No status';
 
-            let badgeColor = '';
-            let badgeText = '';
+        //     let badgeColor = '';
+        //     let badgeText = '';
 
-            switch (latestStatus) {
-                case 'PENDING':
-                    badgeColor = 'warning';
-                    badgeText = 'Pending';
-                    break;
-                case 'CONFIRMED':
-                    badgeColor = 'success';
-                    badgeText = 'Confirmed';
-                    break;
-                case 'INPROGRESS':
-                    badgeColor = 'primary';
-                    badgeText = 'In Progress';
-                    break;
-                case 'COMPLETED':
-                    badgeColor = 'success';
-                    badgeText = 'Completed';
-                    break;
-                case 'DONE':
-                    badgeColor = 'success';
-                    badgeText = 'Done';
-                    break;
-                case 'CANCELLED':
-                    badgeColor = 'danger';
-                    badgeText = 'Cancelled';
-                    break;
-                case 'RESCHEDULED':
-                    badgeColor = 'purple';
-                    badgeText = 'Resheduled';
-                    break;
-                case 'DELAYED':
-                    badgeColor = 'warning';
-                    badgeText = 'Delayed';
-                    break;
-                case 'NOSHOW':
-                    badgeColor = 'gray';
-                    badgeText = 'No show';
-                    break;
-                case 'BACKJOBPENDING':
-                    badgeColor = 'warning';
-                    badgeText = 'Back job Pending';
-                    break;
-                case 'BACKJOBCONFIRMED':
-                    badgeColor = 'primary';
-                    badgeText = 'Back job Confirmed';
-                    break;
-                case 'BACKJOBCOMPLETED':
-                    badgeColor = 'success';
-                    badgeText = 'Back job Completed';
-                    break;
-                default:
-                    badgeText = 'No status';
-            }
-            const formattedDate = new Date(booking.appointmentDate).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: '2-digit',
+        //     switch (latestStatus) {
+        //         case 'PENDING':
+        //             badgeColor = 'warning';
+        //             badgeText = 'Pending';
+        //             break;
+        //         case 'CONFIRMED':
+        //             badgeColor = 'success';
+        //             badgeText = 'Confirmed';
+        //             break;
+        //         case 'INPROGRESS':
+        //             badgeColor = 'primary';
+        //             badgeText = 'In Progress';
+        //             break;
+        //         case 'COMPLETED':
+        //             badgeColor = 'success';
+        //             badgeText = 'Completed';
+        //             break;
+        //         case 'DONE':
+        //             badgeColor = 'success';
+        //             badgeText = 'Done';
+        //             break;
+        //         case 'CANCELLED':
+        //             badgeColor = 'danger';
+        //             badgeText = 'Cancelled';
+        //             break;
+        //         case 'RESCHEDULED':
+        //             badgeColor = 'purple';
+        //             badgeText = 'Resheduled';
+        //             break;
+        //         case 'DELAYED':
+        //             badgeColor = 'warning';
+        //             badgeText = 'Delayed';
+        //             break;
+        //         case 'NOSHOW':
+        //             badgeColor = 'gray';
+        //             badgeText = 'No show';
+        //             break;
+        //         case 'BACKJOBPENDING':
+        //             badgeColor = 'warning';
+        //             badgeText = 'Back job Pending';
+        //             break;
+        //         case 'BACKJOBCONFIRMED':
+        //             badgeColor = 'primary';
+        //             badgeText = 'Back job Confirmed';
+        //             break;
+        //         case 'BACKJOBCOMPLETED':
+        //             badgeColor = 'success';
+        //             badgeText = 'Back job Completed';
+        //             break;
+        //         default:
+        //             badgeText = 'No status';
+        //     }
+        //     const formattedDate = new Date(booking.appointmentDate).toLocaleDateString('en-US', {
+        //         year: 'numeric',
+        //         month: 'long',
+        //         day: '2-digit',
+        //     });
+        //     const mechanicFullname = booking.mechanic ? `${booking.mechanic.firstname} ${booking.mechanic.lastname}` : 'No mechanic assigned yet';
+        //     const reviewButton = latestStatus === 'COMPLETED' ? (
+        //         <button onClick={() => openReviewModal(booking)} className="btn btn-success py-1 px-2">
+        //             Review
+        //         </button>
+        //     ) : null;
+
+        //     const rescheduleButton = latestStatus === 'COMPLETED' ? (
+        //         <button onClick={() => openRescheduleModal(booking)} className="btn btn-success py-1 px-2">
+        //             Reschedule
+        //         </button>
+        //     ) : null;
+
+        //     data.rows.push({
+        //         id: booking._id,
+        //         numofServices: booking.appointmentServices.length,
+        //         appointmentDate: formattedDate,
+        //         timeSlot: booking.timeSlot,
+        //         mechanic: mechanicFullname,
+        //         amount: `$${booking.totalPrice}`,
+        //         serviceType: booking.serviceType,
+        //         status: (
+        //             <span className={`badge badge-${badgeColor}`}>
+        //                 {badgeText}
+        //             </span>
+        //         ),
+        //         view: (
+        //             <Link to={`/appointment/${booking._id}`} className="btn btn-primary py-1 px-2">
+        //                 <CiRead />
+        //             </Link>
+        //         ),
+        //         review: reviewButton,
+        //         backjob: rescheduleButton,
+        //     });
+        // });
+
+        if (bookings && Array.isArray(bookings)) {
+            bookings.forEach((booking) => {
+                const appointmentStatus = booking.appointmentStatus || [];
+                const sortedStatus = appointmentStatus.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                const latestStatus = sortedStatus.length > 0 ? sortedStatus[0].status : 'No status';
+
+                let badgeColor = '';
+                let badgeText = '';
+
+                switch (latestStatus) {
+                    case 'PENDING':
+                        badgeColor = 'warning';
+                        badgeText = 'Pending';
+                        break;
+                    case 'CONFIRMED':
+                        badgeColor = 'success';
+                        badgeText = 'Confirmed';
+                        break;
+                    case 'INPROGRESS':
+                        badgeColor = 'primary';
+                        badgeText = 'In Progress';
+                        break;
+                    case 'COMPLETED':
+                        badgeColor = 'success';
+                        badgeText = 'Completed';
+                        break;
+                    case 'DONE':
+                        badgeColor = 'success';
+                        badgeText = 'Done';
+                        break;
+                    case 'CANCELLED':
+                        badgeColor = 'danger';
+                        badgeText = 'Cancelled';
+                        break;
+                    case 'RESCHEDULED':
+                        badgeColor = 'purple';
+                        badgeText = 'Resheduled';
+                        break;
+                    case 'DELAYED':
+                        badgeColor = 'warning';
+                        badgeText = 'Delayed';
+                        break;
+                    case 'NOSHOW':
+                        badgeColor = 'gray';
+                        badgeText = 'No show';
+                        break;
+                    case 'BACKJOBPENDING':
+                        badgeColor = 'warning';
+                        badgeText = 'Back job Pending';
+                        break;
+                    case 'BACKJOBCONFIRMED':
+                        badgeColor = 'primary';
+                        badgeText = 'Back job Confirmed';
+                        break;
+                    case 'BACKJOBCOMPLETED':
+                        badgeColor = 'success';
+                        badgeText = 'Back job Completed';
+                        break;
+                    default:
+                        badgeText = 'No status';
+                }
+                const formattedDate = new Date(booking.appointmentDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: '2-digit',
+                });
+                const mechanicFullname = booking.mechanic ? `${booking.mechanic.firstname} ${booking.mechanic.lastname}` : 'No mechanic assigned yet';
+                const reviewButton = latestStatus === 'COMPLETED' ? (
+                    <button onClick={() => openReviewModal(booking)} className="btn btn-success py-1 px-2">
+                        Review
+                    </button>
+                ) : null;
+
+                const rescheduleButton = latestStatus === 'COMPLETED' ? (
+                    <button onClick={() => openRescheduleModal(booking)} className="btn btn-success py-1 px-2">
+                        Reschedule
+                    </button>
+                ) : null;
+
+                data.rows.push({
+                    id: booking._id,
+                    numofServices: booking.appointmentServices.length,
+                    appointmentDate: formattedDate,
+                    timeSlot: booking.timeSlot,
+                    mechanic: mechanicFullname,
+                    amount: `$${booking.totalPrice}`,
+                    serviceType: booking.serviceType,
+                    status: (
+                        <span className={`badge badge-${badgeColor}`}>
+                            {badgeText}
+                        </span>
+                    ),
+                    view: (
+                        <Link to={`/appointment/${booking._id}`} className="btn btn-primary py-1 px-2">
+                            <CiRead />
+                        </Link>
+                    ),
+                    review: reviewButton,
+                    backjob: rescheduleButton,
+                });
             });
-            const mechanicFullname = booking.mechanic ? `${booking.mechanic.firstname} ${booking.mechanic.lastname}` : 'No mechanic assigned yet';
-            const reviewButton = latestStatus === 'COMPLETED' ? (
-                <button onClick={() => openReviewModal(booking)} className="btn btn-success py-1 px-2">
-                    Review
-                </button>
-            ) : null;
+        }
 
-            const rescheduleButton = latestStatus === 'COMPLETED' ? (
-                <button onClick={() => openRescheduleModal(booking)} className="btn btn-success py-1 px-2">
-                    Reschedule
-                </button>
-            ) : null;
-
-            data.rows.push({
-                id: booking._id,
-                numofServices: booking.appointmentServices.length,
-                appointmentDate: formattedDate,
-                timeSlot: booking.timeSlot,
-                mechanic: mechanicFullname,
-                amount: `$${booking.totalPrice}`,
-                serviceType: booking.serviceType,
-                status: (
-                    <span className={`badge badge-${badgeColor}`}>
-                        {badgeText}
-                    </span>
-                ),
-                view: (
-                    <Link to={`/appointment/${booking._id}`} className="btn btn-primary py-1 px-2">
-                        <CiRead />
-                    </Link>
-                ),
-                review: reviewButton,
-                backjob: rescheduleButton,
-            });
-        });
 
         return data;
     };
