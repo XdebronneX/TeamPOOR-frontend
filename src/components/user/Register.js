@@ -93,11 +93,6 @@ const Registers = () => {
     const LoginHandler = () => {
         navigate('/login');
     };
-    const SuccessMessage = styled.div`
-    color: #00cc00;
-    font-size: 1rem;
-    margin-top: 10px;
-`;
     return (
         <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
             <Flex flex={1}>
@@ -300,9 +295,6 @@ const Registers = () => {
                                     _hover={{
                                         bg: 'blue.700',
                                     }}
-                                    isLoading={loading}
-                                    loadingText="Signing up..."
-                                    disabled={loading}
                                 >
                                     Sign up
                                 </Button>
