@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { createAddresses, clearErrors } from "../../actions/addressActions";
 import { CREATE_ADDRESSES_RESET } from "../../constants/addressConstants";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import MetaData from '../layout/MetaData';
 import {
     Box,
@@ -14,7 +14,6 @@ import {
     Input,
     Select,
     FormErrorMessage,
-    useToast
 } from "@chakra-ui/react";
 import {
     regions,
@@ -26,7 +25,6 @@ import {
 const CreateAddresses = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const toast = useToast();
 
     const { createdAddresses, error, loading } = useSelector((state) => state.newAddresses);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -46,28 +44,16 @@ const CreateAddresses = () => {
     const [selectedCity, setSelectedCity] = useState("");
     const [selectedBarangay, setSelectedBarangay] = useState("");
 
-    const handleSuccess = () => {
-        toast({
-            title: "Success!",
-            description: "Address created successfully!",
-            status: "success",
-            duration: 3000,
-            isClosable: true,
+    const handleSuccess = (message = '') => {
+        toast.success(message, {
+            position: toast.POSITION.BOTTOM_CENTER,
         });
-        reset(); // Reset form after successful submission
-        dispatch({ type: CREATE_ADDRESSES_RESET });
-        navigate("/my-addresses");
     };
 
-    const handleError = (message) => {
-        toast({
-            title: "Error!",
-            description: message,
-            status: "error",
-            duration: 3000,
-            isClosable: true,
+    const handleError = (error = '') => {
+        toast.error(error, {
+            position: toast.POSITION.BOTTOM_CENTER,
         });
-        dispatch(clearErrors());
     };
 
     const submitHandler = (data) => {
